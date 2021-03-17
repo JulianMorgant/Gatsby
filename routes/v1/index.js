@@ -4,6 +4,7 @@ var router = express.Router();
 const userRoute = require('./user');
 
 router.get('/', async (req, res) => {
+    console.log("router //");
     res.status(200).json({
         name   : 'API', 
         version: '1.0', 
