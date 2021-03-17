@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const clientOptions = {
   //  useNewUrlParser   : true,
-  //  dbName            : 'apinode'
+  //  dbName            : ''
 };
 
 exports.initClientDbConnection = async () => {

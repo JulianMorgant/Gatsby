@@ -28,8 +28,8 @@ const express      = require('express');
 const cookieParser = require('cookie-parser');
 const logger       = require('morgan');
 const cors         = require('cors');
-const User = require("./models/User");
-const mongoose = require("mongoose");
+// const User = require("./models/User");
+// const mongoose = require("mongoose");
 const indexRouter = require('./routes/v1/index');
 const userRouter = require('./routes/v1/user');
 const mongodb     = require('./db/mongo');
@@ -62,7 +62,7 @@ app.use('/v1', indexRouter);
 app.use('/user', userRouter);
 
 app.use(function(req, res, next) {
-    res.status(404).json({name: 'API', version: '1.0', status: 404, message: 'not_foundf'});
+    res.status(404).json({name: 'API', version: '1.0', status: 404, message: 'not_found'});
 });
 
 app.listen(process.env.PORT, () =>
