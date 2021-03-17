@@ -62,11 +62,11 @@ app.use('/v1', indexRouter);
 app.use('/user', userRouter);
 
 app.use(function(req, res, next) {
-    res.status(404).json({name: 'API', version: '1.0', status: 404, message: 'not_found'});
+    res.status(404).json({name: 'Gatsby', version: '3.0', status: 404, message: 'not_found'});
 });
 
 app.listen(process.env.PORT, () =>
-  console.log(`server has started at port ${process.env.PORT}`)
+  console.log(`Gatsby server has started at port ${process.env.PORT}`)
 );
 
 // module.exports = app;
