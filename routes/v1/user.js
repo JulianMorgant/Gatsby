@@ -6,14 +6,14 @@ const { authenticateJWT } = require('../../utils/token');
 
 router.get('/getAll',authenticateJWT, service.getAll);
 
-router.get('/:id', service.getById);
+router.get('/:id',authenticateJWT, service.getById);
 
-router.get('/', service.getByToken);
+router.get('/',authenticateJWT, service.getByToken);
 
-router.put('/add', service.add);
+router.put('/add',authenticateJWT, service.add);
 
-router.patch('/update', service.update);
+router.patch('/update',authenticateJWT, service.update);
 
-router.delete('/:id', service.delete);
+router.delete('/:id',authenticateJWT, service.delete);
 
 module.exports = router;
