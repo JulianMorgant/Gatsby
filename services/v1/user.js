@@ -3,6 +3,12 @@ const jwt = require("jsonwebtoken");
 const Token = require("../../utils/token");
 
 exports.getAll = async (req, res, next) => {
+
+  const roles = req.user.roles;
+
+  console.log (req.user);
+  console.log (role);
+
   try {
     let userList = await User.find();
 
@@ -115,7 +121,7 @@ exports.update = async (req, res, next) => {
 };
 
 exports.delete = async (req, res, next) => {
-  const { id } = req.body;
+  const { id } = req.params;
 
   try {
     await User.deleteOne({ _id: id });
