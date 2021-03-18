@@ -5,7 +5,9 @@ const service = require('../../services/v1/user');
 
 router.get('/:id', service.getById);
 
-router.get('/', service.getAll);
+router.get('/getAll', service.getAll);
+
+router.get('/', service.getByToken);
 
 router.put('/add', service.add);
 

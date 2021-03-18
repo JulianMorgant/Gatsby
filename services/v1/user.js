@@ -1,6 +1,7 @@
 const User = require("../../models/User");
 
 exports.getAll = async (req, res, next) => {
+  console.log("getAllUsers : " + req.headers.authorization);
   try {
     let userList = await User.find();
 
@@ -13,9 +14,24 @@ exports.getAll = async (req, res, next) => {
   }
 };
 
+exports.getByToken = async (req, res, next) => {
+  console.log("getByToken : " + req.headers.authorization);
+  try {
+    let userList = await User.find();
+
+    if (userList) {
+      return res.status(200).json(userList);
+    }
+    return res.status(404).json("user_not_found");
+  } catch (error) {
+    return res.status(501).json(error);
+  }
+};
+
+
 exports.getById = async (req, res, next) => {
   const { id } = req.params;
-
+  console.log("getUserById : " + id );
   try {
     let user = await User.findById(id);
 

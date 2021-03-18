@@ -5,17 +5,22 @@ const jwt = require("jsonwebtoken");
 exports.login = async (req, res, next) => {
   console.log(" login service ");
 
-  const email = req.body.email;                 //TODO à passer dans autorization ?
+  const email = req.body.email; //TODO à passer dans autorization ?
   const password = req.body.password;
 
-  User.findOne({ email }).then((user) => { // TODO Refactor try catch ?
+  console.log("###########");
+  console.log(email + " " + password);
+  console.log("###########");
+
+  User.findOne({ email }).then((user) => {
+    // TODO Refactor try catch ?
     if (!user) {
       return res.status(404).json({ email: "User not found" });
     }
 
     // Compare psw hash
 
-    bcrypt.compare(password, user.password).then((isMatch) => {  
+    bcrypt.compare(password, user.password).then((isMatch) => {
       if (isMatch) {
         //create JWT payload
         const payload = {
@@ -33,12 +38,17 @@ exports.login = async (req, res, next) => {
           (err, token) => {
             res.json({
               success: true,
-              token: "Bearer " + token,
+              token: token,
+              data: {
+                //
+                
+                user: user,
+              },
             });
           }
         );
       } else {
-        return res.status(400).json({password: "Wrong Password"});   // TODO ~?
+        return res.status(400).json({ password: "Wrong Password" }); // TODO ~?
       }
     });
   });
