@@ -1,7 +1,8 @@
+
+
+
 var express = require('express');
 var router = express.Router();
-
-// const userRoute = require('./user');
 
 router.get('/', async (req, res) => {
     console.log("router //");
@@ -12,7 +13,5 @@ router.get('/', async (req, res) => {
         message: 'Bienvenue Gatsby'
     });
 });
-
-// router.use('/users', userRoute);
 
 module.exports = router;
