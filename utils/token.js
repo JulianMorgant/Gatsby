@@ -3,15 +3,34 @@ const jwt = require("jsonwebtoken");
 exports.getId = (token) => {
   console.log(token);
   if (!token) return undefined;
-  token = token.replace("Bearer", "").trim();
+  token = token.replace("Bearer", "").trim(); // const token = token.split(' ')[1];
   console.log(token);
-  return jwt.verify(token, process.env.TOKEN_KEY, function (err, decoded) {
+  return jwt.verify(token, process.env.TOKEN_KEY, function (err, user) {
     if (err) {
       console.log(err);
       return undefined;
     }
-    console.log("id " + decoded.id);
+    console.log("id " + user.id);
 
-    return decoded.id.trim();
+    return user.id.trim();
   });
+};
+
+exports.authenticateJWT = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
+
+    jwt.verify(token, accessTokenSecret, (err, user) => {
+      if (err) {
+        return res.sendStatus(403);
+      }
+
+      req.user = user;
+      next();
+    });
+  } else {
+    res.sendStatus(401);
+  }
 };
