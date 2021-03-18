@@ -7,7 +7,11 @@ exports.getAll = async (req, res, next) => {
   const roles = req.user.roles;
 
   console.log (req.user);
-  console.log (role);
+  console.log (roles);
+
+  if (!roles.includes('Admin')) {
+    return res.sendStatus(403);
+}
 
   try {
     let userList = await User.find();
