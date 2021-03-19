@@ -17,7 +17,10 @@ exports.getId = (token) => {
 };
 
 exports.authenticateJWT = (req, res, next) => {
+  
   const authHeader = req.headers.authorization;
+
+  console.log("use : authenticateJWT");
 
   if (authHeader) {
     const token = authHeader.split(" ")[1];
@@ -28,9 +31,12 @@ exports.authenticateJWT = (req, res, next) => {
       }
 
       req.user = user;
+
       next();
     });
   } else {
     res.sendStatus(401);
-  }
+  };
+ 
+ 
 };
