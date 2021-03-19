@@ -33,6 +33,7 @@ const cors         = require('cors');
 const indexRouter = require('./routes/v1/index');
 const userRouter = require('./routes/v1/user');
 const loginRouter = require('./routes/v1/login');
+const meRouter = require('./routes/v1/me');
 const mongodb     = require('./db/mongo');
 
 mongodb.initClientDbConnection();
@@ -62,6 +63,7 @@ app.use(cookieParser());
 app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/login', loginRouter);
+app.use('/me', meRouter);
 
 app.use(function(req, res, next) {
     res.status(404).json({name: 'Gatsby', version: '3.0', status: 404, message: 'not_found'});

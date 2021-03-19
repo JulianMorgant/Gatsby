@@ -3,11 +3,6 @@ const jwt = require("jsonwebtoken");
 const Token = require("../../utils/token");
 
 exports.getAll = async (req, res, next) => {
-  const roles = req.user.roles;
-
-  if (!roles.includes("Admin")) {
-    return res.sendStatus(403);
-  }
 
   try {
     let userList = await User.find();
