@@ -12,7 +12,7 @@ router.put("/", authenticateJWT, HasRole("Admin"), service.add);
 
 router.patch("/", authenticateJWT, HasRole("Admin"), service.update);
 
-router.delete("/", authenticateJWT, HasRole("Admin"), service.delete);
+router.delete("/:id", authenticateJWT, HasRole("Admin"), service.delete);
 
 function HasRole(role) {
   return function (req, res, next) {
