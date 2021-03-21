@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const Token = require("../../utils/token");
 
 exports.getAll = async (req, res, next) => {
-
   try {
     let userList = await User.find();
 
@@ -68,6 +67,8 @@ exports.add = async (req, res, next) => {
   const temp = {};
 
   ({
+    name: temp.name,
+    firstname: temp.firstname,
     pseudo: temp.pseudo,
     email: temp.email,
     password: temp.password,
@@ -86,25 +87,40 @@ exports.add = async (req, res, next) => {
 };
 
 exports.update = async (req, res, next) => {
+  const { id } = req.params;
   const temp = {};
 
   ({
+    name: temp.name,
+    firstname: temp.firstname,
     pseudo: temp.pseudo,
     email: temp.email,
     password: temp.password,
     roles: temp.roles,
   } = req.body);
 
+  console.log("+++++temp 1+++++++++++");
+  console.log(temp);
+
   try {
-    let user = await User.findOne({ email: temp.email });
+    let user = await User.findById(id);
+    console.log(user)
 
     if (user) {
       Object.keys(temp).forEach((key) => {
         if (!!temp[key]) {
+          console.log("######");
+          console.log(`key : ${key} user key : ${user[key]} tempkey : ${temp[key]}`)
           user[key] = temp[key];
         }
       });
-
+      console.log("++++++++++++++++");
+      console.log(req.body);
+      console.log("++++++++++++++++");
+      console.log(temp);
+      console.log("++++++++++++++++");
+      console.log(user);
+      
       await user.save();
       return res.status(201).json(user);
     }

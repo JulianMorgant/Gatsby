@@ -4,6 +4,16 @@ const bcrypt = require("bcryptjs");
 
 const User = new Schema(
   {
+    name: {
+      type: String,
+      trim: true,
+      required: [false],
+    },
+    firstname: {
+      type: String,
+      trim: true,
+      required: [false],
+    },
     pseudo: {
       type: String,
       trim: true,
@@ -23,7 +33,7 @@ const User = new Schema(
     roles: {
       type: [String],
       default: ["Guest"],
-      required : [true, 'Le role est obligatoire'],
+      required: [true, "Le role est obligatoire"],
     },
   },
 
