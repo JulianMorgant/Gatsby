@@ -10,7 +10,7 @@ router.get("/:id", authenticateJWT, HasRole("Admin"), service.getById);
 
 router.put("/", authenticateJWT, HasRole("Admin"), service.add);
 
-router.patch("/", authenticateJWT, HasRole("Admin"), service.update);
+router.patch("/:id", authenticateJWT, HasRole("Admin"), service.update);
 
 router.delete("/:id", authenticateJWT, HasRole("Admin"), service.delete);
 
