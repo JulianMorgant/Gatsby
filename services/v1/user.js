@@ -75,6 +75,8 @@ exports.add = async (req, res, next) => {
     roles: temp.roles,
   } = req.body);
 
+  console.log(`=> create User : ${temp}`)
+
   Object.keys(temp).forEach((key) => temp[key] == null && delete temp[key]);
 
   try {
