@@ -4,7 +4,7 @@ const router = express.Router();
 const service = require("../../services/v1/user");
 const { authenticateJWT } = require("../../utils/token");
 
-router.get("/", service.getAll);
+router.get("/", authenticateJWT, HasRole("Admin"),service.getAll);
 
 router.get("/:id", authenticateJWT, HasRole("Admin"), service.getById);
 
