@@ -33,44 +33,52 @@ const User = new Schema(
       type: String,
       trim: true,
       required: [true, "Le pseudo est obligatoire"],
-      // unique: true, //TODO https://mongoosejs.com/docs/validation.html#the-unique-option-is-not-a-validator
-      validate: {
- 
-        //async validation for unique pseudo require a promise
-        validator: async function (v) { 
-          var ret = await services.isPseudoExists(v);
-          return !ret;
-        
-        },
-          
-       
-        message: (props) => `${props.value} est déja utilisé`,
+      unique: true, //rem :  https://mongoosejs.com/docs/validation.html#the-unique-option-is-not-a-validator
+      validate: [
+        {
+          //async validation for unique pseudo -> require a promise from isPseudoExists
+          validator: async function (v) {
+            var ret = await services.isPseudoExists(v);
+            return !ret;
+          },
 
-
-    /*    validator: function (v) {
-          console.log("------------");
-          return /^[a-zA-Z0-9]{4,15}$/.test(v);
+          message: (props) => `le pseudo : ${props.value} est déja utilisé`,
         },
-        message: (props) => `${props.value} n'est pas un pseudo valide`,
-        */
-      },
-      
+        {
+          validator: function (v) {
+            console.log("------------");
+            return /^[a-zA-Z0-9]{4,15}$/.test(v);
+          },
+          message: (props) => `${props.value} n'est pas un pseudo valide`,
+        },
+      ],
     },
 
     email: {
       type: String,
       trim: true,
       required: [true, "L’email est obligatoire"],
-      unique: true, // index unique //TODO Validation : https://mongoosejs.com/docs/validation.html#the-unique-option-is-not-a-validator
+      unique: true, //rem: index unique //TODO Validation : https://mongoosejs.com/docs/validation.html#the-unique-option-is-not-a-validator
       lowercase: true,
-      validate: {
-        validator: function (v) {
-          return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-            v
-          );
+      validate: [
+        {
+          //async validation for unique email -> require a promise from isEmailExists
+          validator: async function (v) {
+            var ret = await services.isEMailExists(v);
+            return !ret;
+          },
+          message: (props) => `le mail : ${props.value} est déja utilisé`,
         },
-        message: (props) => `${props.value} n'est pas un email valide`,
-      },
+
+        {
+          validator: function (v) {
+            return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+              v
+            );
+          },
+          message: (props) => `${props.value} n'est pas un email valide`,
+        },
+      ],
     },
     password: {
       type: String,
@@ -79,7 +87,7 @@ const User = new Schema(
         validator: function (v) {
           return /^[a-zA-Z0-9]{1,15}$/.test(v);
         },
-        message: (props) => `${props.value} n'est pas un email valide`,
+        message: (props) => `le mot de passe n'est pas valide`,
       },
     },
     roles: {
