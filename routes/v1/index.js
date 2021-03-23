@@ -1,8 +1,5 @@
-
-
-
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 router.get('/', async (req, res) => {
     console.log("router //");
@@ -10,7 +7,7 @@ router.get('/', async (req, res) => {
         name   : 'Gatsby API', 
         version: '3.0', 
         status : 200, 
-        message: 'Bienvenue Gatsby'
+        message: 'Bienvenue sur Gatsby'
     });
 });
 
