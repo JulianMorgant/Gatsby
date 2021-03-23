@@ -15,6 +15,46 @@ exports.getAll = async (req, res, next) => {
   }
 };
 
+exports.find = async (req, res, next) => {
+  const search = req.body;
+  
+  console.log (`=>find : ${search}`);
+
+  if (!search) {
+    res.status(501).json(error);
+  }
+  try {
+    let userList = await User.find(search);
+
+    if (userList) {
+      return res.status(200).json(userList);
+    }
+    return res.status(404).json("user_not_found");
+  } catch (error) {
+    return res.status(501).json(error);
+  }
+};
+
+exports.exists = async (req, res, next) => {
+  const search = req.body;
+  
+  console.log (`=>find : ${search}`);
+
+  if (!search) {
+    res.status(501);
+  }
+  try {
+    let userList = await User.find(search);
+
+    if (userList) {
+      return res.status(200).json("found");
+    }
+    return res.status(404).json("not_found");
+  } catch (error) {
+    return res.status(501).json(error);
+  }
+};
+
 exports.getByToken = async (req, res, next) => {
   console.log("getByToken : " + req.headers.authorization);
 
@@ -75,7 +115,7 @@ exports.add = async (req, res, next) => {
     roles: temp.roles,
   } = req.body);
 
-  console.log(`=> create User : ${temp}`)
+  console.log(`=> create User : ${temp}`);
 
   Object.keys(temp).forEach((key) => temp[key] == null && delete temp[key]);
 
@@ -106,13 +146,15 @@ exports.update = async (req, res, next) => {
 
   try {
     let user = await User.findById(id);
-    console.log(user)
+    console.log(user);
 
     if (user) {
       Object.keys(temp).forEach((key) => {
         if (!!temp[key]) {
           console.log("######");
-          console.log(`key : ${key} user key : ${user[key]} tempkey : ${temp[key]}`)
+          console.log(
+            `key : ${key} user key : ${user[key]} tempkey : ${temp[key]}`
+          );
           user[key] = temp[key];
         }
       });
@@ -122,7 +164,7 @@ exports.update = async (req, res, next) => {
       console.log(temp);
       console.log("++++++++++++++++");
       console.log(user);
-      
+
       await user.save();
       return res.status(201).json(user);
     }
