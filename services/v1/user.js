@@ -1,5 +1,4 @@
 const User = require("../../models/User");
-const jwt = require("jsonwebtoken");
 const Token = require("../../utils/token");
 
 exports.getAll = async (req, res, next) => {
@@ -10,46 +9,6 @@ exports.getAll = async (req, res, next) => {
       return res.status(200).json(userList);
     }
     return res.status(404).json("user_not_found");
-  } catch (error) {
-    return res.status(501).json(error);
-  }
-};
-
-exports.find = async (req, res, next) => {
-  const search = req.body;
-  
-  console.log (`=>find : ${search}`);
-
-  if (!search) {
-    res.status(501).json(error);
-  }
-  try {
-    let userList = await User.find(search);
-
-    if (userList) {
-      return res.status(200).json(userList);
-    }
-    return res.status(404).json("user_not_found");
-  } catch (error) {
-    return res.status(501).json(error);
-  }
-};
-
-exports.exists = async (req, res, next) => {
-  const search = req.body;
-  
-  console.log (`=>find : ${search}`);
-
-  if (!search) {
-    res.status(501);
-  }
-  try {
-    let userList = await User.find(search);
-
-    if (userList) {
-      return res.status(200).json("found");
-    }
-    return res.status(404).json("not_found");
   } catch (error) {
     return res.status(501).json(error);
   }
@@ -71,20 +30,6 @@ exports.getByToken = async (req, res, next) => {
   } catch (error) {
     return res.status(501).json(error);
   }
-
-  /*
-  try {
-    let userList = await User.find();
-
-    if (userList) {
-      return res.status(200).json(userList);
-    }
-    return res.status(404).json("user_not_found");
-  } catch (error) {
-    return res.status(501).json(error);
-  }
-
-  */
 };
 
 exports.getById = async (req, res, next) => {
@@ -185,4 +130,32 @@ exports.delete = async (req, res, next) => {
   } catch (error) {
     return res.status(501).json(error);
   }
+};
+
+exports.isPseudoExists = async (pseudo) => {
+  return new Promise((resolve) => {
+    User.find({ pseudo: pseudo }, function (err, res) {
+      if (err) {
+        return handleError(err);
+      }
+      if (res) {
+        if (res.length === 0) resolve(false);
+        resolve(true);
+      }
+    });
+  });
+};
+
+exports.isEMailExists = async (email) => {
+  return new Promise((resolve) => {
+    User.find({ email: email }, function (err, res) {
+      if (err) {
+        return handleError(err);
+      }
+      if (res) {
+        if (res.length === 0) resolve(false);
+        resolve(true);
+      }
+    });
+  });
 };
