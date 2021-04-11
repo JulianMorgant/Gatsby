@@ -39,6 +39,7 @@ exports.add = async (req, res, next) => {
     link: temp.link,
     stars_1: temp.stars_1,
     stars_2: temp.stars_2,
+    owner: temp.owner,
   } = req.body);
 
   console.log(`=> create Badge : ${temp}`);
@@ -59,12 +60,13 @@ exports.update = async (req, res, next) => {
   const temp = {};
 
   ({
-    name: temp.name,
-    firstname: temp.firstname,
-    pseudo: temp.pseudo,
-    email: temp.email,
-    password: temp.password,
-    roles: temp.roles,
+    title: temp.title,
+    text: temp.text,
+    image: temp.image,
+    link: temp.link,
+    stars_1: temp.stars_1,
+    stars_2: temp.stars_2,
+    owner: temp.owner,
   } = req.body);
 
   console.log("+++++temp 1+++++++++++");

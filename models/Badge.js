@@ -91,39 +91,54 @@ const Badge = new Schema(
       },
     },
     stars_2: {
-        number: {
-          type: String,
-          trim: true,
-          required: [false],
-          unique: false,
-          validate: [
-            {
-              validator: function (v) {
-                console.log("------------");
-                return true; // /^[a-zA-Z0-9]{4,15}$/.test(v);TODO
-              },
-              message: (props) => `${props.value} n'est pas un logo valide`,
+      number: {
+        type: String,
+        trim: true,
+        required: [false],
+        unique: false,
+        validate: [
+          {
+            validator: function (v) {
+              console.log("------------");
+              return true; // /^[a-zA-Z0-9]{4,15}$/.test(v);TODO
             },
-          ],
-        },
-        label: {
-          type: String,
-          trim: true,
-          required: [false],
-          unique: false,
-          validate: [
-            {
-              validator: function (v) {
-                console.log("------------");
-                return true; // /^[a-zA-Z0-9]{4,15}$/.test(v);TODO
-              },
-              message: (props) => `${props.value} n'est pas un logo valide`,
-            },
-          ],
-        },
+            message: (props) => `${props.value} n'est pas un logo valide`,
+          },
+        ],
       },
+      label: {
+        type: String,
+        trim: true,
+        required: [false],
+        unique: false,
+        validate: [
+          {
+            validator: function (v) {
+              console.log("------------");
+              return true; // /^[a-zA-Z0-9]{4,15}$/.test(v);TODO
+            },
+            message: (props) => `${props.value} n'est pas un logo valide`,
+          },
+        ],
+      },
+    },
   },
+  {
+    owner: {
+      type: String,
+      trim: true,
+      required: true,
+      unique: false,
+    },
+  },
+  {
+    rank :{
+      type: Number,
+      require : true,
+      unique: true,
+    }
 
+  },
   {
     timestamps: true, // ajoute 2 champs au document createdAt et updatedAt
   }
