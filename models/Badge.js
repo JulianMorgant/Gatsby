@@ -37,7 +37,7 @@ const Badge = new Schema(
         {
           validator: function (v) {
             console.log("------------");
-            return true; // /^[a-zA-Z0-9]{4,15}$/.test(v);
+            return true; // /^[a-zA-Z0-9]{4,15}$/.test(v);TODO
           },
           message: (props) => `${props.value} n'est pas un logo valide`,
         },
@@ -52,7 +52,7 @@ const Badge = new Schema(
         {
           validator: function (v) {
             console.log("------------");
-            return true; // /^[a-zA-Z0-9]{4,15}$/.test(v);
+            return true; // /^[a-zA-Z0-9]{4,15}$/.test(v);TODO
           },
           message: (props) => `${props.value} n'est pas un logo valide`,
         },
@@ -68,7 +68,7 @@ const Badge = new Schema(
           {
             validator: function (v) {
               console.log("------------");
-              return true; // /^[a-zA-Z0-9]{4,15}$/.test(v);
+              return true; // /^[a-zA-Z0-9]{4,15}$/.test(v);TODO
             },
             message: (props) => `${props.value} n'est pas un logo valide`,
           },
@@ -83,7 +83,7 @@ const Badge = new Schema(
           {
             validator: function (v) {
               console.log("------------");
-              return true; // /^[a-zA-Z0-9]{4,15}$/.test(v);
+              return true; // /^[a-zA-Z0-9]{4,15}$/.test(v);TODO
             },
             message: (props) => `${props.value} n'est pas un logo valide`,
           },
@@ -100,7 +100,7 @@ const Badge = new Schema(
             {
               validator: function (v) {
                 console.log("------------");
-                return true; // /^[a-zA-Z0-9]{4,15}$/.test(v);
+                return true; // /^[a-zA-Z0-9]{4,15}$/.test(v);TODO
               },
               message: (props) => `${props.value} n'est pas un logo valide`,
             },
@@ -115,7 +115,7 @@ const Badge = new Schema(
             {
               validator: function (v) {
                 console.log("------------");
-                return true; // /^[a-zA-Z0-9]{4,15}$/.test(v);
+                return true; // /^[a-zA-Z0-9]{4,15}$/.test(v);TODO
               },
               message: (props) => `${props.value} n'est pas un logo valide`,
             },
